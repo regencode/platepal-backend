@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider   = "prisma-client"
+  output     = "../generated/prisma"
   engineType = "client"
 }
 
@@ -8,9 +8,61 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  FREE
+  PREMIUM
+  ADMIN
+}
+
+enum MealTime {
+  BREAKFAST
+  LUNCH
+  DINNER
+  SNACK
+}
+
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  name     String
-  password String
+  id            Int            @id @default(autoincrement())
+  email         String         @unique
+  name          String
+  password      String
+  role          Role?          @default(FREE)
+  meals         Meal[]
+  refreshToken  String?
+  nutritionGoal NutritionGoal?
+}
+
+model Meal {
+  id        Int        @id @default(autoincrement())
+  userId    Int
+  user      User       @relation(fields: [userId], references: [id])
+  name      MealTime
+  eatenAt   DateTime
+  items     MealItem[]
+  createdAt DateTime   @default(now())
+}
+
+model MealItem {
+  id                Int    @id @default(autoincrement())
+  mealId            Int
+  meal              Meal   @relation(fields: [mealId], references: [id])
+  food_name         String
+  estimated_portion Int
+  calories          Int
+  protein           Int
+  fat               Int
+  carbohydrates     Int
+  fiber             Int?
+  sugar             Int?
+  sodium            Int?
+}
+
+model NutritionGoal {
+  id            String @id
+  userId        Int    @unique
+  user          User   @relation(fields: [userId], references: [id])
+  calories      Int
+  protein       Int?
+  carbohydrates Int?
+  fat           Int?
 }

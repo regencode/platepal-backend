@@ -77,7 +77,7 @@ model Membership {
     user        User  @relation(fields: [userId], references: [id])
     tier        MembershipTier
     createdAt   DateTime    @default(now())
-    expiresAt   DateTime
+    expiresAt   DateTime?
 }
 
 

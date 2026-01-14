@@ -8,10 +8,20 @@ import { LlmModule } from './llm/llm.module';
 import { HealthModule } from './health/health.module';
 import { MealModule } from './meals/meal.module';
 import { NutritionGoalModule } from './nutrition-goals/nutrition-goal.module';
+import { MembershipModule } from './membership/membership.module';
 
 @Module({
-  imports: [PrismaModule, UserModule, AuthModule, LlmModule, HealthModule, MealModule, NutritionGoalModule],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        PrismaModule, 
+        UserModule, 
+        AuthModule, 
+        LlmModule, 
+        HealthModule, 
+        MealModule, 
+        NutritionGoalModule, 
+        MembershipModule,
+    ],
+        controllers: [AppController],
+        providers: [AppService],
 })
 export class AppModule {}

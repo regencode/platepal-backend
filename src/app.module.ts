@@ -9,10 +9,12 @@ import { HealthModule } from './health/health.module';
 import { MealModule } from './meals/meal.module';
 import { NutritionGoalModule } from './nutrition-goals/nutrition-goal.module';
 import { MembershipModule } from './membership/membership.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
     imports: [
         PrismaModule, 
+        ScheduleModule.forRoot(),
         UserModule, 
         AuthModule, 
         LlmModule, 

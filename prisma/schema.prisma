@@ -9,9 +9,11 @@ datasource db {
 }
 
 enum Role {
-  FREE
-  PREMIUM
+  USER
   ADMIN
+}
+enum MembershipTier {
+  PREMIUM
 }
 
 enum MealTime {
@@ -26,43 +28,57 @@ model User {
   email         String         @unique
   name          String
   password      String
-  role          Role?          @default(FREE)
+  role          Role?          @default(USER)
   meals         Meal[]
   refreshToken  String?
   nutritionGoal NutritionGoal?
+  membership    Membership?    
+  hasOnboarded  Boolean        @default(false)
 }
 
 model Meal {
   id        Int        @id @default(autoincrement())
   userId    Int
   user      User       @relation(fields: [userId], references: [id])
-  name      MealTime
-  eatenAt   DateTime
+  name      String 
   items     MealItem[]
+  eatenAt   DateTime   @default(now())
   createdAt DateTime   @default(now())
 }
 
 model MealItem {
-  id                Int    @id @default(autoincrement())
-  mealId            Int
-  meal              Meal   @relation(fields: [mealId], references: [id])
-  food_name         String
-  estimated_portion Int
-  calories          Int
-  protein           Int
-  fat               Int
-  carbohydrates     Int
-  fiber             Int?
-  sugar             Int?
-  sodium            Int?
+    id                   Int     @id     @default(autoincrement())               
+    mealId               Int                                                                
+    meal                 Meal    @relation(fields:  [mealId], references:  [id])
+    food_name            String                                                             
+    estimated_portion_g  Int     @default(0)                                                
+    calories_kcal        Int     @default(0)                                                
+    protein_g            Int     @default(0)                                                
+    fat_g                Int     @default(0)                                                
+    carbohydrates_g      Int     @default(0)                                                
+    fiber_g              Int?    @default(0)                                                
+    sugar_g              Int?    @default(0)                                                
+    sodium_mg            Int?    @default(0)                                                
 }
 
 model NutritionGoal {
-  id            String @id
-  userId        Int    @unique
-  user          User   @relation(fields: [userId], references: [id])
-  calories      Int
-  protein       Int?
-  carbohydrates Int?
-  fat           Int?
+    id               Int   @id                @default(autoincrement())               
+    userId           Int   @unique                                                    
+    user             User  @relation(fields:  [userId],                  references:  [id])
+    calories_kcal    Int   @default(0)                                                
+    protein_g        Int?  @default(0)                                                
+    carbohydrates_g  Int?  @default(0)                                                
+    fat_g            Int?  @default(0)                                                
 }
+
+model Membership {
+    id          Int   @id @default(autoincrement()) 
+    userId      Int   @unique
+    user        User  @relation(fields: [userId], references: [id])
+    tier        MembershipTier
+    createdAt   DateTime    @default(now())
+    expiresAt   DateTime
+}
+
+
+

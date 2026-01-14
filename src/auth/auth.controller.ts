@@ -1,8 +1,11 @@
-import { Controller, Post, Body, Res } from '@nestjs/common';
+import { Controller, Post, Get, Body, UseGuards, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Response } from 'express';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { ReqUser } from 'src/types/ReqUser';
 
 @Controller('auth')
 export class AuthController {
@@ -24,7 +27,12 @@ export class AuthController {
             sameSite: 'strict',
             path: '/auth/refresh',
         });
-
         return { accessToken };
+    }
+
+    @Get("me")
+    @UseGuards(JwtAuthGuard)
+    getMe(@CurrentUser() user: ReqUser){
+        return user;
     }
 }

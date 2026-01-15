@@ -28,12 +28,19 @@ export class AuthController {
             sameSite: 'strict',
             path: '/auth/refresh',
         });
-        return { accessToken };
+        return { accessToken, refreshToken };
     }
     @Post("logout")
     @UseGuards(JwtRefreshGuard)
     async logout(@CurrentUser() user: ReqUser) {
         return this.authService.logout(user);
+    }
+
+    @Post("refresh")
+    @UseGuards(JwtRefreshGuard)
+    checkRefresh(@CurrentUser() user: ReqUser){
+        // todo: refresh access token
+        return user;
     }
 
     @Get("me")

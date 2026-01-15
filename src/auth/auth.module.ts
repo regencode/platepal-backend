@@ -14,7 +14,7 @@ import { JwtRefreshStrategy } from './strategies/jwt-refresh.strategy';
         PrismaModule,
         PassportModule,
         JwtModule.register({
-          secret: env("JWT_SECRET"),
+          secret: env("JWT_ACCESS_SECRET"),
           signOptions: { expiresIn: '15m' }, // access token
         }),
         UserModule,

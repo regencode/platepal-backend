@@ -20,7 +20,7 @@ export class AuthService {
 
         const accessToken = await this.jwtService.signAsync(payload, {
               secret: process.env.JWT_ACCESS_SECRET,
-              expiresIn: '60m',
+              expiresIn: '5m',
             });
 
         const refreshToken = await this.jwtService.signAsync(payload, {
@@ -68,5 +68,8 @@ export class AuthService {
             accessToken,
             refreshToken
         }
+    }
+    async logout(user: ReqUser) {
+        return this.repo.deleteRefreshToken(user.sub);
     }
 }

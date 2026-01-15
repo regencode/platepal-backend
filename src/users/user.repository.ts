@@ -30,8 +30,8 @@ export class UserRepository {
             where: { email }
         })
     }
-    async update(id: number, dto: UpdateUserDto) {
-        return await this.prisma.user.update({
+    update(id: number, dto: UpdateUserDto) {
+        return this.prisma.user.update({
             where: { id },
             data: dto,
         });
@@ -42,4 +42,11 @@ export class UserRepository {
             where: { id },
         })
     }
+    deleteRefreshToken(id: number) {
+        return this.prisma.user.update({
+            where: { id },
+            data:  { refreshToken: null }
+        })
+    }
+
 }

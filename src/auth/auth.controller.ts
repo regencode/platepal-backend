@@ -6,6 +6,7 @@ import { Response } from 'express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { ReqUser } from 'src/types/ReqUser';
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +29,11 @@ export class AuthController {
             path: '/auth/refresh',
         });
         return { accessToken };
+    }
+    @Post("logout")
+    @UseGuards(JwtRefreshGuard)
+    async logout(@CurrentUser() user: ReqUser) {
+        return this.authService.logout(user);
     }
 
     @Get("me")

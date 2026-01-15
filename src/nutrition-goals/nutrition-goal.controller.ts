@@ -19,7 +19,7 @@ export class MeNutritionGoalController {
   @Patch()
   @UseGuards(JwtAuthGuard)
   update(@CurrentUser() user: ReqUser, @Body() dto: UpdateNutritionGoalDto) {
-    return this.service.update(user, dto);
+    return this.service.updateUserNutritionGoal(user, dto);
   }
 
   @Get()
@@ -29,3 +29,15 @@ export class MeNutritionGoalController {
   }
 
 }
+
+@Controller('nutrition-goals')
+export class NutritionGoalController {
+  constructor(private readonly service: NutritionGoalService) {}
+
+  @Delete(":id")
+  delete(@Param("id") id: number) {
+      return this.service.delete(id);
+  }
+}
+
+

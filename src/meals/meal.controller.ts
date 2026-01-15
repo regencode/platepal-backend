@@ -8,6 +8,7 @@ import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { ReqUser } from 'src/types/ReqUser';
 import { toZonedTime, fromZonedTime } from 'date-fns-tz';
 import { startOfDay, endOfDay } from 'date-fns';
+import { UpdateMealItemDto } from './dto/update-mealItem.dto';
 
 @Controller('me/meals')
 export class MeMealController {
@@ -20,17 +21,19 @@ export class MeMealController {
     }
 
 
-    @Post(":id")
+    @Patch(":id")
     @UseGuards(JwtAuthGuard)
-    createMealItem(@CurrentUser() user: ReqUser, 
-                   @Param("id") mealId: number, 
-                   @Body() createMealDto: CreateMealItemDto) {
-        return this.service.createMealItem(user, mealId, createMealDto);
+    updateMeal(@CurrentUser() user: ReqUser, 
+               @Param("id") mealId: number, 
+               @Body() dto: UpdateMealDto) {
+        return this.service.updateMeal(mealId, dto);
     }
 
     @Get()
     @UseGuards(JwtAuthGuard)
-    findUserMeals(@CurrentUser() user: ReqUser, @Query("date") userDateISO: string, @Query("timezone") timezone: string ) {
+    findUserMealsInDate(@CurrentUser() user: ReqUser, 
+                        @Query("date") userDateISO: string, 
+                        @Query("timezone") timezone: string ) {
         if(!userDateISO || !timezone) return this.service.findUserMeals(user);
         const localStartISO = startOfDay(new Date(userDateISO));
         const localEndISO = endOfDay(new Date(userDateISO));
@@ -40,9 +43,42 @@ export class MeMealController {
         return this.service.findUserMealsByTimePeriod(user, startUTC, endUTC);
     }
 
+
+    @Post(":id")
+    @UseGuards(JwtAuthGuard)
+    createMealItem(@CurrentUser() user: ReqUser, 
+                   @Param("id") mealId: number, 
+                   @Body() createMealDto: CreateMealItemDto) {
+        return this.service.createMealItem(user, mealId, createMealDto);
+    }
+
     @Get(":id")
-    findMealItems(@Param("id") mealId: number) {
-        return this.service.findMealItems(mealId);
+    findMealItemsInMeal(@Param("id") mealId: number) {
+        return this.service.findMealItemsInMeal(mealId);
+    }
+
+    @Delete(":id")
+    delete(@Param("id") mealId: number) {
+        return this.service.deleteMeal(mealId);
+    }
+}
+
+@Controller("mealItem")
+export class MealItemController {
+    constructor(private readonly service: MealService) {}
+    @Get(":id")
+    get(@Param("id") mealItemId: number) {
+        this.service.findMealItem(mealItemId);
+    }
+
+    @Patch(":id")
+    update(@Param("id") mealItemId: number, @Body() dto: UpdateMealItemDto) {
+        return this.service.updateMealItem(mealItemId, dto);
+    }
+
+    @Delete(":id")
+    delete(@Param("id") mealItemId: number) {
+        return this.service.deleteMealItem(mealItemId);
     }
 
 }

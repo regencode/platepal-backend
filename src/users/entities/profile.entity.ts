@@ -11,6 +11,7 @@ export class ProfileEntity {
   name!: string;
   role!: Role;
   createdAt!: Date;
+
   @Exclude()
   password!: string;
   @Exclude()

@@ -22,15 +22,15 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('profile')
+    @Get('me')
     async findProfile(@CurrentUser() user: ReqUser) {
         const resolvedUser : any = await this.userService.findOne(user.sub); 
         return new ProfileEntity(resolvedUser!);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Patch('profile')
-    async updateProfile(@CurrentUser() user: {sub: number , email: string}, @Body() dto: UpdateUserDto) {
+    @Patch('me')
+    async updateProfile(@CurrentUser() user: ReqUser, @Body() dto: UpdateUserDto) {
         return this.userService.update(user.sub, dto);
     }
 

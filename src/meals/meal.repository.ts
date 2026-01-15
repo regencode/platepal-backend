@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { CreateMealDto } from "./dto/create-meal.dto";
 import { UpdateMealDto } from "./dto/update-meal.dto";
 import { PrismaService } from "src/prisma/prisma.service";
-import { MealTime } from "generated/prisma/enums";
 import { CreateMealItemDto } from "./dto/create-mealItem.dto";
+import { UpdateMealItemDto } from "./dto/update-mealItem.dto";
 
 @Injectable()
 export class MealRepository {
@@ -13,6 +13,23 @@ export class MealRepository {
         return this.prisma.meal.create({
             data: { userId: userId, name: dto.name }
         });
+    }
+    update(mealId: number, dto: UpdateMealDto) {
+        return this.prisma.meal.update({
+            where: { id: mealId },
+            data:  { ...dto }
+        })
+    }
+    findByMealId(mealId: number) {
+        return this.prisma.meal.findUnique({
+            where: { id: mealId }
+        })
+    }
+
+    delete(mealId: number) {
+        return this.prisma.meal.delete({
+            where: { id: mealId },
+        })
     }
     
     findUserMeals(userId: number) {
@@ -33,11 +50,6 @@ export class MealRepository {
             }
         })
     }
-    findByMealId(mealId: number) {
-        return this.prisma.meal.findUnique({
-            where: { id: mealId }
-        })
-    }
 
     createMealItem(mealId: number, dto: CreateMealItemDto) {
         return this.prisma.mealItem.create({
@@ -45,11 +57,28 @@ export class MealRepository {
         });
     }
 
-    findMealItems(mealId: number) {
+    findMealItemsInMeal(mealId: number) {
         return this.prisma.mealItem.findMany({
-            where: {mealId: mealId}
+            where: { mealId: mealId }
         })
     }
 
+    findMealItem(mealItemId: number) {
+        return this.prisma.mealItem.findUnique({
+            where: { id: mealItemId }
+        })
+    }
+
+    updateMealItem(mealItemId: number, dto: UpdateMealItemDto) {
+        return this.prisma.mealItem.update({
+            where: { id: mealItemId },
+            data:  { ...dto }
+        });
+    }
+    deleteMealItem(mealItemId: number) {
+        return this.prisma.mealItem.delete({
+            where: { id: mealItemId },
+        })
+    }
 
 }

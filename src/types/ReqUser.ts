@@ -1,4 +1,5 @@
 export interface ReqUser {
     sub: number,
-    email: string
+    email: string,
+    refreshToken?: string,
 }

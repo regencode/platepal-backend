@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import * as bcrypt from "bcrypt";
@@ -23,11 +23,11 @@ export class AuthService {
               expiresIn: '5m',
             });
 
-        const refreshToken = await this.jwtService.signAsync(payload, {
-          secret: process.env.JWT_REFRESH_SECRET,
-          expiresIn: '7d',
-        });
-        return { accessToken, refreshToken }
+            const refreshToken = await this.jwtService.signAsync(payload, {
+                secret: process.env.JWT_REFRESH_SECRET,
+                expiresIn: '7d',
+            });
+            return { accessToken, refreshToken }
     }
 
     async register(dto: RegisterDto) {
@@ -63,7 +63,7 @@ export class AuthService {
         const newDto : UpdateUserDto = {
             refreshToken: refreshTokenHash,
         }
-        this.repo.update(id, newDto);
+        await this.repo.update(id, newDto);
         return {
             accessToken,
             refreshToken
@@ -71,5 +71,13 @@ export class AuthService {
     }
     async logout(user: ReqUser) {
         return this.repo.deleteRefreshToken(user.sub);
+    }
+    async refresh(user: ReqUser) {
+        const { sub, email, refreshToken } = user;
+        const matchedUser = await this.repo.findOne(sub);
+        if(!matchedUser) throw new NotFoundException("User is not found! note: user might be deleted");
+        const isMatch = await bcrypt.compare(refreshToken, matchedUser.refreshToken);
+        if(isMatch) return await this.signTokens(user.sub, user.email)
+        throw new ForbiddenException("Refresh tokens do not match in database");
     }
 }

@@ -40,7 +40,7 @@ export class AuthController {
     @UseGuards(JwtRefreshGuard)
     checkRefresh(@CurrentUser() user: ReqUser){
         // todo: refresh access token
-        return user;
+        return this.authService.refresh(user);
     }
 
     @Get("me")

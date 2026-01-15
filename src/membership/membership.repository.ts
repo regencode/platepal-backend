@@ -27,7 +27,7 @@ export class MembershipRepository {
             where: { id }
         })
     }
-    deleteBefore(timestampUTC: string) {
+    deleteExpiredBefore(timestampUTC: string) {
         return this.prisma.membership.deleteMany({
             where: {
                 expiresAt: {

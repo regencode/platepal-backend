@@ -14,7 +14,7 @@ export class MembershipService {
         console.log("[CRON] Deleting expired items...");
         const now = new Date().toISOString()
         try {
-            await this.repo.deleteBefore(now);
+            await this.repo.deleteExpiredBefore(now);
             console.log('[CRON] Done deleting expired items');
         } catch (err) {
             console.error('[CRON] Failed:', err);

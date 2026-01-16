@@ -2,7 +2,7 @@ import { ConflictException, ForbiddenException, Injectable, NotFoundException } 
 import { CreateNutritionGoalDto } from './dto/create-nutrition-goal.dto';
 import { UpdateNutritionGoalDto } from './dto/update-nutrition-goal.dto';
 import { NutritionGoalRepository } from './nutrition-goal.repository';
-import { ReqUser } from 'src/types/ReqUser';
+import type { ReqUser } from 'src/types/ReqUser';
 
 @Injectable()
 export class NutritionGoalService {

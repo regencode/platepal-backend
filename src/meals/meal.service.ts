@@ -2,7 +2,7 @@ import { ForbiddenException, Injectable, NotFoundException, UnauthorizedExceptio
 import { CreateMealDto } from './dto/create-meal.dto';
 import { CreateMealItemDto } from './dto/create-mealItem.dto';
 import { MealRepository } from './meal.repository';
-import { ReqUser } from 'src/types/ReqUser';
+import type { ReqUser } from 'src/types/ReqUser';
 import { UpdateMealItemDto } from './dto/update-mealItem.dto';
 import { UpdateMealDto } from './dto/update-meal.dto';
 

@@ -5,7 +5,7 @@ import { LoginDto } from './dto/login.dto';
 import { Response } from 'express';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { ReqUser } from 'src/types/ReqUser';
+import type { ReqUser } from 'src/types/ReqUser';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 
 @Controller('auth')

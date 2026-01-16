@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMembershipDto } from './dto/create-membership.dto';
 import { UpdateMembershipDto } from './dto/update-membership.dto';
-import { ReqUser } from 'src/types/ReqUser';
+import type { ReqUser } from 'src/types/ReqUser';
 import { MembershipRepository } from './membership.repository';
 import { Cron } from '@nestjs/schedule';
 

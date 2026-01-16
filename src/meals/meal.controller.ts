@@ -5,7 +5,7 @@ import { UpdateMealDto } from './dto/update-meal.dto';
 import { CreateMealItemDto } from './dto/create-mealItem.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
-import { ReqUser } from 'src/types/ReqUser';
+import type { ReqUser } from 'src/types/ReqUser';
 import { toZonedTime, fromZonedTime } from 'date-fns-tz';
 import { startOfDay, endOfDay } from 'date-fns';
 import { UpdateMealItemDto } from './dto/update-mealItem.dto';

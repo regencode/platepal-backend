@@ -4,7 +4,7 @@ import { CreateNutritionGoalDto } from './dto/create-nutrition-goal.dto';
 import { UpdateNutritionGoalDto } from './dto/update-nutrition-goal.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
-import { ReqUser } from 'src/types/ReqUser';
+import type { ReqUser } from 'src/types/ReqUser';
 
 @Controller('me/nutrition-goals')
 export class MeNutritionGoalController {

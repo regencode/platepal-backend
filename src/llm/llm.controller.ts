@@ -7,10 +7,10 @@ export class LlmController {
     constructor(private readonly llmService: LlmService) {}
 
     @Post()
-    query(@Body() dto: QueryLLMDto) {
+    queryMealInformation(@Body() dto: QueryLLMDto) {
         if(!dto.encodedImage) {
             return this.llmService.textQuery(dto);
         }
-        return this.llmService.query(dto);
+        return this.llmService.queryMealInformation(dto);
     }
 }

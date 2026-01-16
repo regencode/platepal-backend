@@ -10,10 +10,12 @@ import { MealModule } from './meals/meal.module';
 import { NutritionGoalModule } from './nutrition-goals/nutrition-goal.module';
 import { MembershipModule } from './membership/membership.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { S3Module } from './s3/s3.module';
 
 @Module({
     imports: [
         PrismaModule, 
+        S3Module,
         ScheduleModule.forRoot(),
         UserModule, 
         AuthModule, 

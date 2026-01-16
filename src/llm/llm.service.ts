@@ -38,8 +38,21 @@ export class LlmService {
                 const res = {
                     modelUsed: model,
                     data: JSON.parse(completion.choices[0].message.content as string),
+                    confidence: 0,
                 }
-                console.log(res);
+                const mealItemDto: CreateMealItemDto = {
+                    "food_name": res.data.mealData.food_name,
+                    "estimated_portion_g": res.data.mealData.estimated_portion_g,
+                    "calories_kcal": res.data.mealData.calories_kcal,
+                    "protein_g": res.data.mealData.macronutrients.protein_g,
+                    "fat_g": res.data.mealData.macronutrients.fat_g,
+                    "carbohydrates_g": res.data.mealData.macronutrients.carbohydrates_g,
+                    "fiber_g": res.data.mealData.micronutrients.fiber_g,
+                    "sugar_g": res.data.mealData.micronutrients.sugar_g,
+                    "sodium_mg": res.data.mealData.micronutrients.sodium_mg,
+                }
+                res.confidence = res.data.mealData.confidence;
+                res.data = mealItemDto as any;
                 return res;
 
             } catch {

@@ -21,7 +21,8 @@ export class S3Service {
         const signedUrl = await s3.getSignedUrlPromise("putObject", {
             Bucket: process.env.R2_BUCKET,
             Key: fileName,
-            Expires: 180
+            Expires: 180,
+            ContentType: "image/jpg"
         })
         return signedUrl;
     }

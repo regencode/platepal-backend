@@ -1,3 +1,8 @@
+# PlatePal Backend
+
+Documentation link: [Postman Documenter](https://documenter.getpostman.com/view/50162193/2sBXVhEXBm)
+Published on Railway: [Railway](platepal-backend-production.up.railway.app)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>

@@ -76,6 +76,7 @@ export class AuthService {
         const { sub, email, refreshToken } = user;
         const matchedUser = await this.repo.findOne(sub);
         if(!matchedUser) throw new NotFoundException("User is not found! note: user might be deleted");
+        if(!matchedUser.refreshToken) throw new UnauthorizedException("User has not yet logged in!");
         const isMatch = await bcrypt.compare(refreshToken, matchedUser.refreshToken);
         if(isMatch) return await this.signTokens(user.sub, user.email)
         throw new ForbiddenException("Refresh tokens do not match in database");

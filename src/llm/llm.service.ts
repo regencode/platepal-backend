@@ -38,7 +38,7 @@ export class LlmService {
                 const res = {
                     modelUsed: model,
                     data: JSON.parse(completion.choices[0].message.content as string),
-                    confidence: 0,
+                    confidence: 0.0,
                 }
                 const mealItemDto: CreateMealItemDto = {
                     "food_name": res.data.mealData.food_name,
@@ -51,7 +51,7 @@ export class LlmService {
                     "sugar_g": res.data.mealData.micronutrients.sugar_g,
                     "sodium_mg": res.data.mealData.micronutrients.sodium_mg,
                 }
-                res.confidence = res.data.mealData.confidence;
+                res.confidence = res.data.confidence;
                 res.data = mealItemDto as any;
                 return res;
 

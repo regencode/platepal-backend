@@ -1,4 +1,4 @@
 export const MODELS = [
-    "qwen/qwen3-vl-30b-a3b-thinking"
+    "google/gemini-3-flash-preview"
 ];
 

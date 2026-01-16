@@ -46,7 +46,7 @@ export class LlmService {
                 continue;
             }
         }
-        console.log("All free models exhausted, returning fallback response bruhhhhhhh");
+        console.log("All free models exhausted, returning fallback response");
         let res = {
             "encodedImage": dto.encodedImage,
             "modelUsed": "google/gemma-3-27b-it:free",
@@ -89,11 +89,16 @@ export class LlmService {
         });
 
         const completion = await openRouter.chat.send({
-            model: 'allenai/molmo-2-8b:free',
+            model: MODELS[0],
             messages: [
                 {
                     role: "user",
-                    content: dto.text
+                    content: [
+                        {
+                            type: "text",
+                            text: dto.text,
+                        },
+                    ],
                 }
             ],
             stream: false,

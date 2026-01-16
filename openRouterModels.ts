@@ -1,4 +1,4 @@
 export const MODELS = [
-    "x-ai/grok-4.1-fast"
+    "qwen/qwen3-vl-30b-a3b-thinking"
 ];
 

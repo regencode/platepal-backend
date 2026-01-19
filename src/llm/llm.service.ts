@@ -61,7 +61,6 @@ export class LlmService {
         }
         console.log("All free models exhausted, returning fallback response");
         let res = {
-            "encodedImage": dto.encodedImage,
             "modelUsed": "google/gemma-3-27b-it:free",
             "mealData": {
                 "food_name": "Grilled Cheese Sandwich",

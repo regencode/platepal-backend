@@ -1,24 +1,21 @@
 import { Injectable } from "@nestjs/common";
-import S3 from "aws-sdk/clients/s3.js";
+import { S3Client, PutObjectCommand, S3ServiceException } from "@aws-sdk/client-s3";
 import "dotenv/config";
 
-const ACCOUNT_ID = process.env.R2_ACCOUNT_ID;
-const ACCESS_KEY_ID = process.env.R2_ACCESS_KEY;
-const SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY;
-
-const s3 = new S3({
-  // Provide your Cloudflare account ID
-  endpoint: `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  // Retrieve your S3 API credentials for your R2 bucket via API tokens (see: https://developers.cloudflare.com/r2/api/tokens)
-  accessKeyId: `${ACCESS_KEY_ID}`,
-  secretAccessKey: `${SECRET_ACCESS_KEY}`,
-  signatureVersion: "v4",
-});
+const client = new S3Client([{
+    forcePathStyle: true,
+    region: process.env.S3_PROJECT_REGION,
+    endpoint: process.env.S3_ENDPOINT,
+    credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    }
+}]);
 
 @Injectable()
 export class S3Service {
     async generateSignedUrl(fileName: string) {
-        const signedUrl = await s3.getSignedUrlPromise("putObject", {
+        const signedUrl = await client.send("putObject", {
             Bucket: process.env.R2_BUCKET,
             Key: fileName,
             Expires: 180,

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { OpenRouter } from '@openrouter/sdk';
 import { QueryLLMDto } from './dto/query-llm.dto';
 import { MODELS } from "openRouterModels";
@@ -41,6 +41,11 @@ export class LlmService {
                 modelUsed: MODELS[0],
                 data: JSON.parse(completion.choices[0].message.content as string),
                 confidence: 0.0,
+            }
+            if (!res.data.mealdata) {
+                console.log(res.data);
+                throw new UnprocessableEntityException("LLM cannot obtain food data. \
+                                                       Maybe the image does not show any valid food items");
             }
             const mealItemDto: CreateMealItemDto = {
                 "food_name": res.data.mealData.food_name,

@@ -44,8 +44,7 @@ export class LlmService {
             }
             if (!res.data.mealdata) {
                 console.log(res.data);
-                throw new UnprocessableEntityException("LLM cannot obtain food data. \
-                                                       Maybe the image does not show any valid food items");
+                return res;
             }
             const mealItemDto: CreateMealItemDto = {
                 "food_name": res.data.mealData.food_name,

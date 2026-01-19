@@ -68,7 +68,7 @@ export class MealItemController {
     constructor(private readonly service: MealService) {}
     @Get(":id")
     get(@Param("id") mealItemId: number) {
-        this.service.findMealItem(mealItemId);
+        return this.service.findMealItem(mealItemId);
     }
 
     @Patch(":id")

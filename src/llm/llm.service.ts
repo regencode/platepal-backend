@@ -37,6 +37,7 @@ export class LlmService {
                 console.log("error: no completion");
                 return;
             }
+            console.log(completion.choices[0].message.content);
             const res = {
                 modelUsed: MODELS[0],
                 data: JSON.parse(completion.choices[0].message.content as string),

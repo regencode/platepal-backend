@@ -14,16 +14,4 @@ const client = new S3Client([{
 
 @Injectable()
 export class S3Service {
-    async generateSignedUrl(fileName: string) {
-        const signedUrl = await client.send("putObject", {
-            Bucket: process.env.R2_BUCKET,
-            Key: fileName,
-            Expires: 180,
-            ContentType: "image/jpg"
-        })
-        return signedUrl;
-    }
-    getPublicUrl(fileName: string) {
-        return `https://${ACCOUNT_ID}.r2.cloudflarestorage.com/${process.env.R2_BUCKET}/${fileName}`;
-    }
 }

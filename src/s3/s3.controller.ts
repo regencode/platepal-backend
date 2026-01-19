@@ -9,9 +9,10 @@ export class S3Controller {
     @UseGuards(JwtAuthGuard)
     @Get('upload-url')
     async getSignedUrl(@Query('fileName') fileName: string) {
-        const signedUrl = await this.service.generateSignedUrl(fileName);
-        const publicUrl = this.service.getPublicUrl(fileName);
-        return { signedUrl, publicUrl };
+        //const signedUrl = await this.service.generateSignedUrl(fileName);
+        //const publicUrl = this.service.getPublicUrl(fileName);
+        //return { signedUrl, publicUrl };
+        return "Not implemented";
     }
 
 }

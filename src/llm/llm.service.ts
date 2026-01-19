@@ -43,7 +43,7 @@ export class LlmService {
                 data: JSON.parse(completion.choices[0].message.content as string),
                 confidence: 0.0,
             }
-            if (!res.data.mealdata) {
+            if (res.data.error) {
                 console.log(res.data);
                 return res;
             }

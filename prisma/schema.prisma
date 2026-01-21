@@ -59,6 +59,8 @@ model MealItem {
     fiber_g              Int?    @default(0)                                                
     sugar_g              Int?    @default(0)                                                
     sodium_mg            Int?    @default(0)                                                
+    imageUri             String?
+    imageSrc             String?
 }
 
 model NutritionGoal {

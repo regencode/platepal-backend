@@ -30,4 +30,12 @@ export class CreateMealItemDto {
     @IsNumber()
     @IsOptional()
     sodium_mg?: number;
+
+    @IsString()
+    @IsOptional()
+    imageUri?: string;
+
+    @IsString()
+    @IsOptional()
+    imageSrc?: string;
 }

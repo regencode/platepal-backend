@@ -5,7 +5,7 @@ Published on Railway: [Railway](platepal-backend-production.up.railway.app)
 
 ## ERD
 
-![ERD image]("images/ERD.png")
+![ERD image](images/ERD.png)
 
 
 <p align="center">

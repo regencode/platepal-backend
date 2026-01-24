@@ -1,0 +1,705 @@
+{
+	"id": "5b89aba1-9a88-4e46-bedb-79d38e6514e7",
+	"name": "platepal",
+	"timestamp": "2026-01-24T02:53:46.052Z",
+	"collection_id": "50162193-2099fcd3-0fd6-451f-a1dc-5f7005a5b35c",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 5,
+	"delay": 500,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-01-24T02:53:27.427Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "6d9974e2-3786-43c3-af01-33cd9b6be13b",
+			"name": "health",
+			"url": "localhost:3000/health",
+			"time": 62,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				62
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "af078b0b-cec5-4293-a8eb-cd8b083cd144",
+			"name": "Register",
+			"url": "localhost:3000/auth/register",
+			"time": 184,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"User created": true
+			},
+			"testPassFailCounts": {
+				"User created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				184
+			],
+			"allTests": [
+				{
+					"User created": true
+				}
+			]
+		},
+		{
+			"id": "ebbac1e3-a15e-4b8a-ab7f-611de54af23a",
+			"name": "Login",
+			"url": "localhost:3000/auth/login",
+			"time": 214,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				214
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "419c7ef0-baaf-4354-9261-0201e6e61ad6",
+			"name": "check me",
+			"url": "localhost:3000/auth/me",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "40792784-a296-41b0-8d80-e7c7b9c683b5",
+			"name": "refresh",
+			"url": "localhost:3000/auth/refresh",
+			"time": 108,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				108
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8ab74a21-9079-4260-9b1a-f8c4b6f4d75a",
+			"name": "delete user",
+			"url": "localhost:3000/users/33",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0736b5c3-f443-43c4-a2a9-3beb9c8e350e",
+			"name": "Login Copy for token",
+			"url": "localhost:3000/auth/login",
+			"time": 209,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				209
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "93c9ef8a-90c2-460a-9561-e2c118bdd544",
+			"name": "profile",
+			"url": "localhost:3000/users/me",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				17
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "67ce1cf1-59a4-4197-a944-b3587c3efe80",
+			"name": "update profile",
+			"url": "localhost:3000/users/me",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				13
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "64923e4d-6ab8-42a5-8df3-318c9a95014d",
+			"name": "create meal for current user",
+			"url": "localhost:3000/me/meals",
+			"time": 14,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Meal created": true
+			},
+			"testPassFailCounts": {
+				"Meal created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				14
+			],
+			"allTests": [
+				{
+					"Meal created": true
+				}
+			]
+		},
+		{
+			"id": "a40f3188-f72e-4add-afe6-601ea409315d",
+			"name": "get current user meals",
+			"url": "localhost:3000/me/meals",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f2a8d397-a4a5-4a1b-bd69-5439e2352145",
+			"name": "get current user meals at specific date",
+			"url": "localhost:3000/me/meals?date=2026-01-14&timezone=Asia/Jakarta",
+			"time": 18,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				18
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "c485647f-f936-41f8-92e7-d880dc72e4a8",
+			"name": "update user meal",
+			"url": "localhost:3000/me/meals/30",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ecf0f26e-d8a2-4316-8f92-efcf0bfe2aed",
+			"name": "create mealitem for user meal",
+			"url": "localhost:3000/me/meals/30",
+			"time": 23,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Meal item created": true
+			},
+			"testPassFailCounts": {
+				"Meal item created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Meal item created": true
+				}
+			]
+		},
+		{
+			"id": "ef8f502a-b8bc-49a8-a12e-70c340cdd07a",
+			"name": "get meal item",
+			"url": "localhost:3000/mealItem/32",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6832a3ba-3c48-4bda-a9a8-a82e0943db67",
+			"name": "get meal items from meal",
+			"url": "localhost:3000/me/meals/30",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "216c748a-ee28-4265-a9c7-0c5f6d193991",
+			"name": "update meal item",
+			"url": "localhost:3000/mealItem/32",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "1f1f63db-02a0-402f-a56d-b461d37f9b97",
+			"name": "delete meal item",
+			"url": "localhost:3000/mealItem/32",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "0a1acfb0-075e-4232-9a50-25534dfcabd6",
+			"name": "delete user meal",
+			"url": "localhost:3000/me/meals/30",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f553f7c8-b6db-48f7-a3ca-8c25db66f5e3",
+			"name": "create nutrition goal for user",
+			"url": "localhost:3000/me/nutrition-goals",
+			"time": 23,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Nutrition goal created": true
+			},
+			"testPassFailCounts": {
+				"Nutrition goal created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Nutrition goal created": true
+				}
+			]
+		},
+		{
+			"id": "43970596-f695-4b71-8a6d-344b4b64d712",
+			"name": "get user nutrition goal",
+			"url": "localhost:3000/me/nutrition-goals",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "f43b1e36-e069-4623-beeb-cf9484ca5820",
+			"name": "update nutrition goals",
+			"url": "localhost:3000/me/nutrition-goals",
+			"time": 24,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				24
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "69c680cd-5653-42ee-ba37-1c2d42da51fa",
+			"name": "delete nutrition goal",
+			"url": "localhost:3000/nutrition-goals/27",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				15
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "76a6275d-8e43-43e6-b9d0-80ebc0e06c21",
+			"name": "Create membership for current user",
+			"url": "localhost:3000/me/membership",
+			"time": 16,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Membership created": true
+			},
+			"testPassFailCounts": {
+				"Membership created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				16
+			],
+			"allTests": [
+				{
+					"Membership created": true
+				}
+			]
+		},
+		{
+			"id": "8b0c4424-8dac-4810-ab14-5835335bb45d",
+			"name": "check if current user has membership",
+			"url": "localhost:3000/me/membership",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				14
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "ee8b10f1-2407-42a2-a998-5a7d8b21ac35",
+			"name": "update membership",
+			"url": "localhost:3000/membership/27",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "bd3e4d80-bb5b-46a5-8614-4989e6a18372",
+			"name": "delete membership",
+			"url": "localhost:3000/membership/27",
+			"time": 16,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				16
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "06f3901f-a750-4fa5-8b7a-04a60249a93d",
+			"name": "logout",
+			"url": "localhost:3000/auth/logout",
+			"time": 12,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				12
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9353a23b-e619-43d2-8079-b5c86f91d2af",
+			"name": "check if logged in -> should not be logged in",
+			"url": "localhost:3000/auth/refresh",
+			"time": 9,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				9
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 1149,
+	"collection": {
+		"requests": [
+			{
+				"id": "6d9974e2-3786-43c3-af01-33cd9b6be13b",
+				"method": "GET"
+			},
+			{
+				"id": "af078b0b-cec5-4293-a8eb-cd8b083cd144",
+				"method": "POST"
+			},
+			{
+				"id": "ebbac1e3-a15e-4b8a-ab7f-611de54af23a",
+				"method": "POST"
+			},
+			{
+				"id": "419c7ef0-baaf-4354-9261-0201e6e61ad6",
+				"method": "GET"
+			},
+			{
+				"id": "40792784-a296-41b0-8d80-e7c7b9c683b5",
+				"method": "POST"
+			},
+			{
+				"id": "8ab74a21-9079-4260-9b1a-f8c4b6f4d75a",
+				"method": "DELETE"
+			},
+			{
+				"id": "0736b5c3-f443-43c4-a2a9-3beb9c8e350e",
+				"method": "POST"
+			},
+			{
+				"id": "93c9ef8a-90c2-460a-9561-e2c118bdd544",
+				"method": "GET"
+			},
+			{
+				"id": "67ce1cf1-59a4-4197-a944-b3587c3efe80",
+				"method": "PATCH"
+			},
+			{
+				"id": "64923e4d-6ab8-42a5-8df3-318c9a95014d",
+				"method": "POST"
+			},
+			{
+				"id": "a40f3188-f72e-4add-afe6-601ea409315d",
+				"method": "GET"
+			},
+			{
+				"id": "f2a8d397-a4a5-4a1b-bd69-5439e2352145",
+				"method": "GET"
+			},
+			{
+				"id": "c485647f-f936-41f8-92e7-d880dc72e4a8",
+				"method": "PATCH"
+			},
+			{
+				"id": "ecf0f26e-d8a2-4316-8f92-efcf0bfe2aed",
+				"method": "POST"
+			},
+			{
+				"id": "ef8f502a-b8bc-49a8-a12e-70c340cdd07a",
+				"method": "GET"
+			},
+			{
+				"id": "6832a3ba-3c48-4bda-a9a8-a82e0943db67",
+				"method": "GET"
+			},
+			{
+				"id": "216c748a-ee28-4265-a9c7-0c5f6d193991",
+				"method": "PATCH"
+			},
+			{
+				"id": "1f1f63db-02a0-402f-a56d-b461d37f9b97",
+				"method": "DELETE"
+			},
+			{
+				"id": "0a1acfb0-075e-4232-9a50-25534dfcabd6",
+				"method": "DELETE"
+			},
+			{
+				"id": "f553f7c8-b6db-48f7-a3ca-8c25db66f5e3",
+				"method": "POST"
+			},
+			{
+				"id": "43970596-f695-4b71-8a6d-344b4b64d712",
+				"method": "GET"
+			},
+			{
+				"id": "f43b1e36-e069-4623-beeb-cf9484ca5820",
+				"method": "PATCH"
+			},
+			{
+				"id": "69c680cd-5653-42ee-ba37-1c2d42da51fa",
+				"method": "DELETE"
+			},
+			{
+				"id": "76a6275d-8e43-43e6-b9d0-80ebc0e06c21",
+				"method": "POST"
+			},
+			{
+				"id": "8b0c4424-8dac-4810-ab14-5835335bb45d",
+				"method": "GET"
+			},
+			{
+				"id": "ee8b10f1-2407-42a2-a998-5a7d8b21ac35",
+				"method": "PATCH"
+			},
+			{
+				"id": "bd3e4d80-bb5b-46a5-8614-4989e6a18372",
+				"method": "DELETE"
+			},
+			{
+				"id": "06f3901f-a750-4fa5-8b7a-04a60249a93d",
+				"method": "POST"
+			},
+			{
+				"id": "9353a23b-e619-43d2-8079-b5c86f91d2af",
+				"method": "POST"
+			}
+		]
+	}
+}

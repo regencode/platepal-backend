@@ -7,6 +7,7 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import type { ReqUser } from 'src/types/ReqUser';
+import { Role } from "generated/prisma/enums";
 
 @Injectable()
 export class AuthService {
@@ -15,8 +16,8 @@ export class AuthService {
 
     saltRounds = 10;
 
-    async signTokens(userId: number, email: string) {
-        const payload : ReqUser = { sub: userId, email };
+    async signTokens(userId: number, email: string, role: Role) {
+        const payload : ReqUser = { sub: userId, email, role };
 
         const accessToken = await this.jwtService.signAsync(payload, {
               secret: process.env.JWT_ACCESS_SECRET,
@@ -40,7 +41,7 @@ export class AuthService {
             email: dto.email,
             password: hashedPassword,
             refreshToken: undefined,
-            role: dto.role ?? undefined
+            role: dto.role ?? "USER",
         }
 
         return this.repo.create(newDto);
@@ -56,7 +57,7 @@ export class AuthService {
         ) 
         if(!passwordsMatch) throw new UnauthorizedException("Incorrect password!");
 
-        const { accessToken, refreshToken } = await this.signTokens(matchedUser.id, dto.email)
+        const { accessToken, refreshToken } = await this.signTokens(matchedUser.id, dto.email, matchedUser.role!)
 
         const refreshTokenHash = await bcrypt.hash(refreshToken, this.saltRounds);
 
@@ -69,16 +70,20 @@ export class AuthService {
             refreshToken
         }
     }
+    async getUserRole(dto: LoginDto) {
+        const matchedUser = await this.repo.findOneWithEmail(dto.email);
+        if(!matchedUser) throw new NotFoundException("User with email does not exist");
+        return matchedUser.role;
+    }
     async logout(user: ReqUser) {
         return this.repo.deleteRefreshToken(user.sub);
     }
     async refresh(user: ReqUser) {
-        const { sub, email, refreshToken } = user;
-        const matchedUser = await this.repo.findOne(sub);
+        const matchedUser = await this.repo.findOne(user.sub);
         if(!matchedUser) throw new NotFoundException("User is not found! note: user might be deleted");
         if(!matchedUser.refreshToken) throw new UnauthorizedException("User has not yet logged in!");
-        const isMatch = await bcrypt.compare(refreshToken, matchedUser.refreshToken);
-        if(isMatch) return await this.signTokens(user.sub, user.email)
+        const isMatch = await bcrypt.compare(user.refreshToken, matchedUser.refreshToken);
+        if(isMatch) return await this.signTokens(user.sub, user.email, user.role);
         throw new ForbiddenException("Refresh tokens do not match in database");
     }
 }

@@ -20,6 +20,7 @@ async function bootstrap() {
             transform: true,
         }),
     );
+    console.log('CORS enabled for origin:', process.env.FRONTEND_URL);
     await app.listen(process.env.PORT ?? 5050);
 }
 bootstrap();

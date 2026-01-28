@@ -15,9 +15,14 @@ export class MembershipRepository {
             }
         })
     }
-    find(userId: number){
+    findByUser(userId: number){
         return this.prisma.membership.findUnique({
             where: { userId }
+        })
+    }
+    findOne(id: number) {
+        return this.prisma.membership.findUnique({
+            where: { id }
         })
     }
     update(id: number, dto: UpdateMembershipDto) {

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, BadRequestException } from '@nestjs/common';
 import { NutritionGoalService } from './nutrition-goal.service';
-import { CreateMyNutritionGoalDto, CreateNutritionGoalDto, CreateNutritionGoalWithUserDto } from './dto/create-nutrition-goal.dto';
+import { CreateNutritionGoalDto, CreateNutritionGoalWithUserDto } from './dto/create-nutrition-goal.dto';
 import { UpdateNutritionGoalDto } from './dto/update-nutrition-goal.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
@@ -38,7 +38,7 @@ export class NutritionGoalController {
 
     @Post()
     @Roles("ADMIN")
-    @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     create(@Body() dto: CreateNutritionGoalWithUserDto) {
         if(!dto.userId) throw new BadRequestException("request body must contain userId");
         return this.service.create(dto.userId, dto);
@@ -46,14 +46,14 @@ export class NutritionGoalController {
 
     @Patch(":id")
     @Roles("ADMIN")
-    @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     update(@Param("id") id: number, @Body() dto: UpdateNutritionGoalDto) {
         return this.service.update(id, dto);
     }
 
     @Delete(":id")
     @Roles("ADMIN")
-    @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     delete(@Param("id") id: number) {
         return this.service.delete(id);
     }

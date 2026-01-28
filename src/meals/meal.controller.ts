@@ -71,7 +71,7 @@ export class MealItemController {
 
     @Get()
     @Roles("ADMIN")
-    @UseGuards(RolesGuard)
+    @UseGuards(JwtAuthGuard, RolesGuard)
     findAll() {
         return this.service.findAllMealItems();
 

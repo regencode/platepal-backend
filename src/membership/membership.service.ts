@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateMembershipDto } from './dto/create-membership.dto';
 import { UpdateMembershipDto } from './dto/update-membership.dto';
 import type { ReqUser } from 'src/types/ReqUser';
@@ -22,15 +22,17 @@ export class MembershipService {
     }
 
     create(userId: number, dto: CreateMembershipDto) {
-        return this.repo.create(userId, dto);
+        const exist = this.repo.findByUser(userId);
+        if(!exist) return this.repo.create(userId, dto);
+        throw new ConflictException("user already has a membership!");
     }
 
     findUser(userId: number) {
-        return this.repo.find(userId);
+        return this.repo.findByUser(userId);
     }
 
     findOne(id: number) {
-        return this.repo.find(id);
+        return this.repo.findOne(id);
     }
         
     update(id: number, dto: UpdateMembershipDto) {

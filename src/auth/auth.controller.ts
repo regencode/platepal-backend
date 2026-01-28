@@ -24,7 +24,7 @@ export class AuthController {
         @Res({ passthrough: true }) res: Response
     ) {
         const { accessToken, refreshToken } = await this.authService.login(dto)
-        res.cookie('refresh_token', refreshToken, {
+        res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
@@ -41,7 +41,7 @@ export class AuthController {
         const role = await this.authService.getUserRole(dto);
         if(role !== "ADMIN") throw new ForbiddenException();
         const { accessToken, refreshToken } = await this.authService.login(dto)
-        res.cookie('refresh_token', refreshToken, {
+        res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
@@ -58,9 +58,9 @@ export class AuthController {
 
     @Post("refresh")
     @UseGuards(JwtRefreshGuard)
-    checkRefresh(@CurrentUser() user: ReqUser){
-        // todo: refresh access token
-        return this.authService.refresh(user);
+    async checkRefresh(@CurrentUser() user: ReqUser){
+        const { accessToken, refreshToken } = await this.authService.refresh(user);
+        return { accessToken, refreshToken };
     }
 
     @Get("me")

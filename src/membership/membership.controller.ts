@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { MembershipService } from './membership.service';
-import { CreateMembershipDto } from './dto/create-membership.dto';
+import { CreateMembershipDto, CreateMembershipWithUserDto } from './dto/create-membership.dto';
 import { UpdateMembershipDto } from './dto/update-membership.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
@@ -30,6 +30,11 @@ export class MembershipController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
+    return this.service.findOne(id);
+  }
+
+  @Post()
+  create(@Body dto: CreateMembershipWithUserDto) {
     return this.service.findOne(id);
   }
 

@@ -9,6 +9,8 @@ import type { ReqUser } from 'src/types/ReqUser';
 import { toZonedTime, fromZonedTime } from 'date-fns-tz';
 import { startOfDay, endOfDay } from 'date-fns';
 import { UpdateMealItemDto } from './dto/update-mealItem.dto';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('me/meals')
 export class MeMealController {
@@ -66,6 +68,14 @@ export class MeMealController {
 @Controller("mealItem")
 export class MealItemController {
     constructor(private readonly service: MealService) {}
+
+    @Get()
+    @Roles("ADMIN")
+    @UseGuards(RolesGuard)
+    findAll() {
+        return this.service.findAllMealItems();
+
+    }
     @Get(":id")
     get(@Param("id") mealItemId: number) {
         return this.service.findMealItem(mealItemId);

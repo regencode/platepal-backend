@@ -1,4 +1,4 @@
-import { IsNumber } from "class-validator";
+import { IsNumber, IsOptional } from "class-validator";
 
 export class CreateNutritionGoalDto {
     @IsNumber()
@@ -12,4 +12,10 @@ export class CreateNutritionGoalDto {
 
     @IsNumber()
     protein_g!: number;
+}
+
+
+export class CreateNutritionGoalWithUserDto extends CreateNutritionGoalDto {
+    @IsNumber()
+    userId!: number;
 }

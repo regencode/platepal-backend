@@ -9,12 +9,18 @@ export class NutritionGoalRepository {
 
   create(userId: number, dto: CreateNutritionGoalDto) {
     return this.prisma.nutritionGoal.create({
-        data: { userId: userId, ...dto }
+        data: { 
+            userId: userId,
+            calories_kcal: dto.calories_kcal,
+            protein_g: dto.protein_g,
+            carbohydrates_g: dto.carbohydrates_g,
+            fat_g: dto.fat_g
+        }
     });
   }
   update(id: number, dto: UpdateNutritionGoalDto) {
     return this.prisma.nutritionGoal.update({
-        where: {id: id},
+        where: { id: id },
         data: { ...dto }
     });
   }

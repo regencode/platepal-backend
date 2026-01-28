@@ -62,6 +62,9 @@ export class MealRepository {
             where: { mealId: mealId }
         })
     }
+    findAllMealItems() {
+        return this.prisma.mealItem.findMany()
+    }
 
     findMealItem(mealItemId: number) {
         return this.prisma.mealItem.findUnique({

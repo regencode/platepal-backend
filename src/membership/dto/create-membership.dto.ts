@@ -12,3 +12,8 @@ export class CreateMembershipDto {
     @IsEnum(MembershipTier)
     tier!: MembershipTier
 }
+
+export class CreateMembershipWithUserDto extends CreateMembershipDto {
+    @IsNumber()
+    userId!: number;
+}

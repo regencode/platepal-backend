@@ -6,6 +6,8 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { ProfileEntity } from './entities/profile.entity';
 import type { ReqUser } from 'src/types/ReqUser';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/auth/decorators/roles.decorator';
 
 @Controller('users')
 export class UserController {
@@ -17,6 +19,8 @@ export class UserController {
     }
 
     @Get()
+    @Roles("ADMIN")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     findAll() {
         return this.userService.findAll();
     }
@@ -35,16 +39,22 @@ export class UserController {
     }
 
 
+    @Roles("ADMIN")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.userService.findOne(+id);
     }
 
+    @Roles("ADMIN")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Patch(':id')
     update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
         return this.userService.update(+id, updateUserDto);
     }
 
+    @Roles("ADMIN")
+    @UseGuards(JwtAuthGuard, RolesGuard)
     @Delete(':id')
     remove(@Param('id') id: string) {
         return this.userService.remove(+id);

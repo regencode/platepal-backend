@@ -8,7 +8,11 @@ export class MembershipRepository {
     constructor(private readonly prisma: PrismaService) {}
     create(userId: number, dto: CreateMembershipDto) {
         return this.prisma.membership.create({
-            data: { userId, ...dto }
+            data: { 
+                userId: userId,
+                tier: dto.tier,
+                expiresAt: dto.expiresAt
+            }
         })
     }
     find(userId: number){

@@ -26,9 +26,10 @@ export class AuthController {
         const { accessToken, refreshToken } = await this.authService.login(dto)
         res.cookie('refresh_token', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // only on prod
-            sameSite: 'strict',
-            path: '/auth/refresh',
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            path: '/',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
         return { accessToken, refreshToken };
     }
@@ -42,12 +43,12 @@ export class AuthController {
         const { accessToken, refreshToken } = await this.authService.login(dto)
         res.cookie('refresh_token', refreshToken, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production', // only on prod
-            sameSite: 'none',
-            path: '/auth/refresh',
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
-        return { accessToken };
+        return { accessToken, refreshToken };
     }
     @Post("logout")
     @UseGuards(JwtRefreshGuard)

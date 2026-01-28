@@ -18,11 +18,20 @@ export class UserRepository {
         });
     }
     findAll() {
-        return this.prisma.user.findMany()
+        return this.prisma.user.findMany({
+            include: {
+                membership: true,
+                nutritionGoal: true,
+            }
+        })
     }
     findOne(id: number) {
         return this.prisma.user.findUnique({
-            where: { id }
+            where: { id },
+            include: {
+                membership: true,
+                nutritionGoal: true,
+            }
         })
     }
     findOneWithEmail(email: string){

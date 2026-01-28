@@ -53,6 +53,9 @@ export class MealService {
     findMealItem(mealItemId: number) {
         return this.repo.findMealItem(mealItemId);
     }
+    findAllMealItems() {
+        return this.repo.findAllMealItems();
+    }
     findMealItemsInMeal(mealId: number) {
         return this.repo.findMealItemsInMeal(mealId);
     }

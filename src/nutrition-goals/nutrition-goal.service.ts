@@ -1,4 +1,4 @@
-import { ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, ConflictException, ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateNutritionGoalDto } from './dto/create-nutrition-goal.dto';
 import { UpdateNutritionGoalDto } from './dto/update-nutrition-goal.dto';
 import { NutritionGoalRepository } from './nutrition-goal.repository';
@@ -8,21 +8,20 @@ import type { ReqUser } from 'src/types/ReqUser';
 export class NutritionGoalService {
     constructor(private readonly repo: NutritionGoalRepository) {}
 
-    async create(user: ReqUser, dto: CreateNutritionGoalDto) {
-        const exists = await this.repo.findOne(user.sub);
-        console.log(exists);
-        if(!exists) return this.repo.create(user.sub, dto);
+    async create(userId: number, dto: CreateNutritionGoalDto) {
+        const exists = await this.repo.findOne(userId);
+        if(!exists) return this.repo.create(userId, dto);
         throw new ConflictException("This user already has a nutrition goal! update it instead");
     }
 
-    async updateUserNutritionGoal(user: ReqUser, dto: UpdateNutritionGoalDto) {
-        const selected = await this.find(user)
+    async updateUserNutritionGoal(userId: number , dto: UpdateNutritionGoalDto) {
+        const selected = await this.find(userId)
         if(!selected) throw new ForbiddenException("This user has no nutrition goal");
         return this.repo.update(selected.id, dto);
     }
 
-    async find(user: ReqUser) {
-        const res = await this.repo.findOne(user.sub);
+    async find(userId: number) {
+        const res = await this.repo.findOne(userId);
         if(!res) throw new NotFoundException("This user has no nutrition goal");
         return res;
     }

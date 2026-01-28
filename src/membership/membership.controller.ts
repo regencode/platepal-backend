@@ -13,13 +13,13 @@ export class MeMembershipController {
   @Post()
   @UseGuards(JwtAuthGuard)
   create(@CurrentUser() user: ReqUser, @Body() dto: CreateMembershipDto) {
-    return this.service.createForUser(user, dto);
+    return this.service.create(user.sub, dto);
   }
 
   @Get()
   @UseGuards(JwtAuthGuard)
   find(@CurrentUser() user: ReqUser) {
-    return this.service.findUser(user);
+    return this.service.findUser(user.sub);
   }
 
 }
@@ -34,7 +34,7 @@ export class MembershipController {
   }
 
   @Post()
-  create(@Body dto: CreateMembershipWithUserDto) {
+  create(@Body() dto: CreateMembershipWithUserDto) {
     return this.service.create(dto.userId, dto);
   }
 

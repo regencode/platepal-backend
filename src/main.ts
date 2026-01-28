@@ -8,9 +8,21 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.use(cookieParser());
 
+    const allowedOrigins = [
+        "https://platepal-admin-panel.vercel.app",
+        process.env.FRONTEND_URL,
+    ];
     app.enableCors({
-        origin: process.env.FRONTEND_URL, // Next.js
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+        origin: (origin, callback) => {
+            // origin can be undefined in mobile apps or Postman
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
+        methods: ['GET','HEAD','PUT','PATCH','POST','DELETE','OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
     });
     app.useGlobalPipes(

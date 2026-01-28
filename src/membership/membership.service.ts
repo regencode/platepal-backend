@@ -21,12 +21,12 @@ export class MembershipService {
         }
     }
 
-    createForUser(user: ReqUser, dto: CreateMembershipDto) {
-        return this.repo.create(user.sub, dto);
+    create(userId: number, dto: CreateMembershipDto) {
+        return this.repo.create(userId, dto);
     }
 
-    findUser(user: ReqUser) {
-        return this.repo.find(user.sub);
+    findUser(userId: number) {
+        return this.repo.find(userId);
     }
 
     findOne(id: number) {

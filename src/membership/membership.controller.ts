@@ -35,7 +35,7 @@ export class MembershipController {
 
   @Post()
   create(@Body dto: CreateMembershipWithUserDto) {
-    return this.service.findOne(id);
+    return this.service.create(dto.userId, dto);
   }
 
   @Patch(':id')

@@ -22,9 +22,7 @@ export class MembershipService {
     }
 
     create(userId: number, dto: CreateMembershipDto) {
-        const exist = this.repo.findByUser(userId);
-        if(!exist) return this.repo.create(userId, dto);
-        throw new ConflictException("user already has a membership!");
+        return this.repo.create(userId, dto);
     }
 
     findUser(userId: number) {

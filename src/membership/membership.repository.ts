@@ -17,12 +17,12 @@ export class MembershipRepository {
     }
     findByUser(userId: number){
         return this.prisma.membership.findUnique({
-            where: { userId }
+            where: { userId: userId }
         })
     }
     findOne(id: number) {
         return this.prisma.membership.findUnique({
-            where: { id }
+            where: { id: id }
         })
     }
     update(id: number, dto: UpdateMembershipDto) {

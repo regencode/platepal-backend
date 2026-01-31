@@ -31,6 +31,13 @@ export class AuthController {
             path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            path: '/',
+            maxAge: 5 * 60 * 1000,
+        });
         return { accessToken, refreshToken };
     }
     @Post("loginAdmin")
@@ -48,6 +55,14 @@ export class AuthController {
             path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
+
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            path: '/',
+            maxAge: 5 * 60 * 1000,
+        });
         return { accessToken, refreshToken };
     }
     @Post("logout")
@@ -58,8 +73,18 @@ export class AuthController {
 
     @Post("refresh")
     @UseGuards(JwtRefreshGuard)
-    async checkRefresh(@CurrentUser() user: ReqUser){
+    async checkRefresh(
+        @CurrentUser() user: ReqUser,
+        @Res({ passthrough: true }) res: Response
+    ){
         const { accessToken, refreshToken } = await this.authService.refresh(user);
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+            path: '/',
+            maxAge: 5 * 60 * 1000,
+        });
         return { accessToken, refreshToken };
     }
 
